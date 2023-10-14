@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  geth: # this is Optimism's geth client
+    build: .
+    ports:
+      - 8545:8545       # RPC
+      - 8546:8546       # websocket
+      - 30303:30303     # P2P TCP (currently unused)
+      - 30303:30303/udp # P2P UDP (currently unused)
+      - 7301:6060       # metrics
+    command: [ "bash", "./geth-entrypoint" ]
+    env_file:
+      - ./goerli/zora/.env # change with the network you want to run
+    volumes:
+      #- ./geth-data/:/data # enable to have persistency between restarts
+      - ./goerli/zora/genesis.json:/genesis.json # change with the network you want to run
+      - ./goerli/zora/rollup.json:/rollup.json # change with the network you want to run
+  node:
+    build: .
+    depends_on:
+      - geth
+    ports:
+      - 7545:8545     # RPC
+      - 9222:9222     # P2P TCP
+      - 9222:9222/udp # P2P UDP
+      - 7300:7300     # metrics
+      - 6060:6060     # pprof
+    command: [ "bash", "./op-node-entrypoint" ]
+    env_file:
+      - ./goerli/zora/.env
+    volumes:
+      - ./goerli/zora/genesis.json:/genesis.json # change with the network you want to run
+      - ./goerli/zora/rollup.json:/rollup.json # change with the network you want to run
