@@ -47,8 +47,15 @@ If you encounter problems with your node, please open a [GitHub issue](https://g
 
 ### Usage
 
-1. Ensure you have an Ethereum L1 full node RPC available (not Conduit), and set `OP_NODE_L1_ETH_RPC` (in the `.env.*` file if using docker-compose). If running your own L1 node, it needs to be synced before the specific Conduit network will be able to fully sync.
-2. Change the line relevant to your network (e.g. `goerli/zora/.env`, `./goerli/zora/genesis.json`, `./goerli/zora/rollup.json`) under the 2 `env_file` keys and the `volumes` in `docker-compose.yml`.
+1. Select the network you want to run (it should exist in the `networks` folder) and set `CONDUIT_NETWORK` env variable. Example:
+
+```
+# for Zora Goerli
+export CONDUIT_NETWORK=zora/goerli
+```
+
+2. Ensure you have an Ethereum L1 full node RPC available (not Conduit), and copy `.env.example` to `.env` setting `OP_NODE_L1_ETH_RPC`. If running your own L1 node, it needs to be synced before the specific Conduit network will be able to fully sync. 
+
 3. Run:
 
 ```

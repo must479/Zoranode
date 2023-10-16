@@ -11,11 +11,12 @@ services:
       - 7301:6060       # metrics
     command: [ "bash", "./geth-entrypoint" ]
     env_file:
-      - ./goerli/zora/.env # change with the network you want to run
+      - .env.default
+      - networks/${CONDUIT_NETWORK:?set network}/.env
+      - .env
     volumes:
       #- ./geth-data/:/data # enable to have persistency between restarts
-      - ./goerli/zora/genesis.json:/genesis.json # change with the network you want to run
-      - ./goerli/zora/rollup.json:/rollup.json # change with the network you want to run
+      - ./networks/${CONDUIT_NETWORK:?set network}/genesis.json:/genesis.json
   node:
     build: .
     depends_on:
@@ -28,7 +29,8 @@ services:
       - 6060:6060     # pprof
     command: [ "bash", "./op-node-entrypoint" ]
     env_file:
-      - ./goerli/zora/.env
+      - .env.default
+      - networks/${CONDUIT_NETWORK:?set network}/.env
+      - .env
     volumes:
-      - ./goerli/zora/genesis.json:/genesis.json # change with the network you want to run
-      - ./goerli/zora/rollup.json:/rollup.json # change with the network you want to run
+      - ./networks/${CONDUIT_NETWORK:?set network}/rollup.json:/rollup.json
