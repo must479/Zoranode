@@ -2,7 +2,7 @@
 
 # Conduit node
 
-Conduit provides fully-managed, production-grade rollups on Ethereum. 
+Conduit provides fully-managed, production-grade rollups on Ethereum.
 
 It currently supports Optimism’s open-source [OP Stack](https://stack.optimism.io/).
 
@@ -47,22 +47,24 @@ If you encounter problems with your node, please open a [GitHub issue](https://g
 
 ### Usage
 
-1. Select the network you want to run (it should exist in the `networks` folder) and set `CONDUIT_NETWORK` env variable. Example:
+1. Download the network you want to run by using `download-config.py`. You will need to know the slug of the network. You can find this in the Conduit console. For example: `./download-config.py zora-goerli-4luacg0wxi`.
+
+2. Select the network you want to run (it should exist in the `networks` folder) and set `CONDUIT_NETWORK` env variable. Example:
 
 ```
 # for Zora Goerli
-export CONDUIT_NETWORK=zora/goerli
+export CONDUIT_NETWORK=zora-goerli-4luacg0wxi
 ```
 
-2. Ensure you have an Ethereum L1 full node RPC available (not Conduit), and copy `.env.example` to `.env` setting `OP_NODE_L1_ETH_RPC`. If running your own L1 node, it needs to be synced before the specific Conduit network will be able to fully sync. 
+3. Ensure you have an Ethereum L1 full node RPC available (not Conduit), and copy `.env.example` to `.env` setting `OP_NODE_L1_ETH_RPC`. If running your own L1 node, it needs to be synced before the specific Conduit network will be able to fully sync.
 
-3. Run:
+4. Run:
 
 ```
 docker compose up --build
 ```
 
-3. You should now be able to `curl` your Conduit node:
+5. You should now be able to `curl` your Conduit node:
 
 ```
 curl -d '{"id":0,"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false]}' \
