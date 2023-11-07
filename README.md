@@ -47,7 +47,7 @@ If you encounter problems with your node, please open a [GitHub issue](https://g
 
 ### Usage
 
-1. Download the network you want to run by using `download-config.py`. You will need to know the slug of the network. You can find this in the Conduit console. For example: `./download-config.py zora-goerli-4luacg0wxi`.
+1. Download the network you want to run by using `download-config.py`. You will need to know the slug of the network. You can find this in the Conduit console. For example: `./download-config.py zora-goerli-4luacg0wxi`. Note: The external nodes feature must be enabled on the network for this to work.
 
 2. Select the network you want to run (it should exist in the `networks` folder) and set `CONDUIT_NETWORK` env variable. Example:
 

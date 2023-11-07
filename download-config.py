@@ -19,8 +19,8 @@ OP_NODE_P2P_BOOTNODES={bootnodes}
 '''
 
 def fetch_data(api_path, slug):
-  with urllib.request.urlopen(f'{CONDUIT_API_URL}{api_path}{slug}') as response:
-    return response.read()
+    with urllib.request.urlopen(f'{CONDUIT_API_URL}{api_path}{slug}') as response:
+        return response.read()
 
 parser = argparse.ArgumentParser(description='Download Conduit Configs')
 parser.add_argument('slug', metavar='SLUG', type=str, help='Slug of the stack you want to download configs for.')
@@ -34,15 +34,24 @@ slug_dir = network_dir / args.slug
 slug_dir.mkdir(exist_ok=True)
 
 print("Downloading rollup.json")
-rollup = fetch_data(ROLLUP_API_PATH, args.slug)
-with open(slug_dir / 'rollup.json', 'wb') as f:
-  f.write(rollup)
-print("Downloading genesis.json")
-genesis = fetch_data(ROLLUP_API_PATH, args.slug)
-with open(slug_dir / 'genesis.json', 'wb') as f:
-  f.write(genesis)
+try:
+    rollup = fetch_data(ROLLUP_API_PATH, args.slug)
+    with open(slug_dir / 'rollup.json', 'wb') as f:
+        f.write(rollup)
+    print("Downloading genesis.json")
+    genesis = fetch_data(GENESIS_API_PATH, args.slug)
+    with open(slug_dir / 'genesis.json', 'wb') as f:
+        f.write(genesis)
+except Exception as e:
+    print("Failed to download with exception:", e)
+    print("Do you have the right network slug?")
+
 print("Fetching bootnodes")
-bootnodes = fetch_data(BOOTNODES_API_PATH, args.slug)
-env_file = ENV_TEMPLATE.format(rpc_url=f'https://rpc-{args.slug}.{CONDUIT_RPC_SUFFIX}', bootnodes=bootnodes)
-with open(slug_dir / '.env', 'w') as f:
-  f.write(env_file)
+try:
+    bootnodes = fetch_data(BOOTNODES_API_PATH, args.slug).decode('utf-8')
+    env_file = ENV_TEMPLATE.format(rpc_url=f'https://rpc-{args.slug}.{CONDUIT_RPC_SUFFIX}', bootnodes=bootnodes)
+    with open(slug_dir / '.env', 'w') as f:
+        f.write(env_file)
+except Exception as e:
+    print("Failed to fetch bootnodes with exception:", e)
+    print("Are external nodes enabled for this network?")
