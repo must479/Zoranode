@@ -43,17 +43,18 @@ If you encounter problems with your node, please open a [GitHub issue](https://g
 
 | Ethereum Network | Status |
 |------------------| ------ |
-| Zora Goerli  | ✅     |
+| Zora Sepolia  | ✅     |
+| PGN Sepolia  | ✅     |
 
 ### Usage
 
-1. Download the network you want to run by using `download-config.py`. You will need to know the slug of the network. You can find this in the Conduit console. For example: `./download-config.py zora-goerli-4luacg0wxi`. Note: The external nodes feature must be enabled on the network for this to work.
+1. Download the network you want to run by using `download-config.py`. You will need to know the slug of the network. You can find this in the Conduit console. For example: `./download-config.py zora-sepolia-0thyhxtf5e`. Note: The external nodes feature must be enabled on the network for this to work.
 
 2. Select the network you want to run (it should exist in the `networks` folder) and set `CONDUIT_NETWORK` env variable. Example:
 
 ```
 # for Zora Goerli
-export CONDUIT_NETWORK=zora-goerli-4luacg0wxi
+export CONDUIT_NETWORK=zora-sepolia-0thyhxtf5e
 ```
 
 3. Ensure you have an Ethereum L1 full node RPC available (not Conduit), and copy `.env.example` to `.env` setting `OP_NODE_L1_ETH_RPC`. If running your own L1 node, it needs to be synced before the specific Conduit network will be able to fully sync.
