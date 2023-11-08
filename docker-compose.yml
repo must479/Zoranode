@@ -34,3 +34,4 @@ services:
       - .env
     volumes:
       - ./networks/${CONDUIT_NETWORK:?set network}/rollup.json:/rollup.json
+      - ./networks/${CONDUIT_NETWORK:?set network}/genesis.json:/genesis.json
