@@ -53,7 +53,7 @@ If you encounter problems with your node, please open a [GitHub issue](https://g
 2. Select the network you want to run (it should exist in the `networks` folder) and set `CONDUIT_NETWORK` env variable. Example:
 
 ```
-# for Zora Goerli
+# for Zora Sepolia
 export CONDUIT_NETWORK=zora-sepolia-0thyhxtf5e
 ```
 
