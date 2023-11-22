@@ -117,3 +117,12 @@ $((($( date +%s )-\
 $( curl -s -d '{"id":0,"jsonrpc":"2.0","method":"optimism_syncStatus"}' -H "Content-Type: application/json" http://localhost:7545 |
    jq -r .result.unsafe_l2.timestamp))/60)) minutes
 ```
+
+### Network Stats
+
+You can see how many nodes you are connected with the following command:
+
+```
+curl -d '{"id":0,"jsonrpc":"2.0","method":"opp2p_peerStats","params":[]}' \
+  -H "Content-Type: application/json" http://localhost:7545
+```
