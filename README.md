@@ -28,6 +28,11 @@ This repository contains the relevant Docker builds to run your own node on the 
 [![GitHub pull requests by-label](https://img.shields.io/github/issues-pr-raw/conduitxyz/node.svg)](https://github.com/conduitxyz/node/pulls)
 [![GitHub Issues](https://img.shields.io/github/issues-raw/conduitxyz/node.svg)](https://github.com/conduitxyz/node/issues)
 
+### Software requirements
+
+- [Docker](https://docs.docker.com/desktop/)
+- [Python 3](https://www.python.org/downloads/)
+
 ### Hardware requirements
 
 We recommend you have this configuration to run a node:
