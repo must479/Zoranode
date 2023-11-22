@@ -46,26 +46,38 @@ If you encounter problems with your node, please open a [GitHub issue](https://g
 
 ### Supported networks
 
-| Ethereum Network | Status | Slug |
-|------------------| ------ | ---- |
-| Zora Sepolia  | ✅     | zora-sepolia-0thyhxtf5e |
-| Zora Mainnet  | ✅     | zora-mainnet-0 |
-| PGN Sepolia  | ✅     | pgn-sepolia-i4td3ji6i0 |
+|Network|Slug|Status|
+|------------------|------|:----:|
+| Zora Sepolia|zora-sepolia-0thyhxtf5e|✅|
+| Zora Mainnet|zora-mainnet-0|✅|
+| PGN Sepolia|pgn-sepolia-i4td3ji6i0|✅|
 
 ### Usage
 
-1. Download the network you want to run by using `download-config.py`. You will need to know the slug of the network. You can find this in the Conduit console. For example: `./download-config.py zora-sepolia-0thyhxtf5e`. Note: The external nodes feature must be enabled on the network for this to work.
-
-2. Select the network you want to run (it should exist in the `networks` folder) and set `CONDUIT_NETWORK` env variable. Example:
+1. Select the network you want to run and set `CONDUIT_NETWORK` env variable. You will need to know the `slug` of the network. You can find this in the Conduit console. For public networks you can use the table above. Example:
 
 ```
-# for Zora Sepolia
-export CONDUIT_NETWORK=zora-sepolia-0thyhxtf5e
+# for Zora Mainnet
+export CONDUIT_NETWORK=zora-mainnet-0
 ```
 
-3. Ensure you have an Ethereum L1 full node RPC available (not Conduit), and copy `.env.example` to `.env` setting `OP_NODE_L1_ETH_RPC`. If running your own L1 node, it needs to be synced before the specific Conduit network will be able to fully sync.
+Note: The external nodes feature must be enabled on the network for this to work. For the public networks above this is already set.
 
-4. Run:
+2. Download the required network configuration with:
+
+```
+./download-config.py $CONDUIT_NETWORK
+```
+
+3. Ensure you have an Ethereum L1 full node RPC available (not Conduit), and copy `.env.example` to `.env` setting `OP_NODE_L1_ETH_RPC`. If running your own L1 node, it needs to be synced before the specific Conduit network will be able to fully sync. Example:
+
+```
+# .env file
+# [recommended] replace with your preferred L1 (Ethereum, not Conduit) node RPC URL:
+OP_NODE_L1_ETH_RPC=https://mainnet.gateway.tenderly.co/<your-tenderly-api-key>
+```
+
+4. Start the node!
 
 ```
 docker compose up --build
@@ -92,7 +104,7 @@ services:
 
 ### Snapshots
 
-TBD
+Not yet available. We're working on it 🏗️
 
 ### Syncing
 
